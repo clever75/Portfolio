@@ -22,7 +22,7 @@
   /* === TYPO === */
   --font-titre:     var(--font-playfair), serif;
   --font-sous:      var(--font-space-grotesk), sans-serif;
-  --font-texte:     var(--font-dm-sans), sans-serif;
+  --font-texte:     var(--font-geist), sans-serif;
   --font-mono:      var(--font-jetbrains), monospace;
 }
 

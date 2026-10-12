@@ -1,46 +1,94 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GraduationCap, MapPin, Briefcase } from "lucide-react";
+import {
+  GraduationCap,
+  MapPin,
+  Briefcase,
+  Languages,
+  CalendarCheck,
+  Target,
+} from "lucide-react";
 import Section from "@/components/ui/Section";
 import SectionTitle from "@/components/ui/SectionTitle";
-import FadeIn from "@/components/ui/FadeIn";
-import { fadeUp, staggerContainer, staggerItem } from "@/lib/animations";
 
-const ficheProfil = {
-  formation: {
+const infosAbout = [
+  {
     icon: GraduationCap,
     label: "Formation",
-    titre: "BTS Développement d'Applications",
+    valeur: "BTS Développement d'Applications",
     detail: "Institut Polytechnique DEFITECH",
   },
-  lieu: {
+  {
     icon: MapPin,
     label: "Lieu",
-    titre: "Lomé, Togo",
+    valeur: "Lomé, Togo",
     detail: null,
   },
-  recherche: {
+  {
     icon: Briefcase,
     label: "Recherche",
-    titre: "Stage • Freelance • Projet ponctuel",
+    valeur: "Stage • Freelance • Projet ponctuel",
     detail: null,
+  },
+  {
+    icon: Languages,
+    label: "Langues",
+    valeur: "Français (courant) • Anglais (scolaire)",
+    detail: null,
+  },
+  {
+    icon: CalendarCheck,
+    label: "Disponibilité",
+    valeur: "Immédiate",
+    detail: null,
+  },
+];
+
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" as const },
   },
 };
 
 export default function About() {
   return (
     <Section id="apropos">
-      {/* Titre de section */}
       <SectionTitle
         number="01"
         label="À propos"
         title="Apprendre en construisant"
       />
 
-      {/* Texte principal — fade-up au scroll */}
-      <FadeIn>
-        <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-encre-douce">
+      {/* === PHRASE SIGNATURE === */}
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.6 }}
+        className="mb-12 max-w-3xl font-titre text-3xl font-bold leading-tight text-encre sm:text-4xl lg:text-5xl"
+      >
+        Comprendre à fond,{" "}
+        <span className="text-indigo">construire juste.</span>
+      </motion.p>
+
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-5">
+        {/* === TEXTE NARRATIF === */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+          className="space-y-5 text-base leading-relaxed text-encre-douce sm:text-lg lg:col-span-3"
+        >
           <p>
             Il y a un truc que j&apos;ai compris en codant : les meilleures
             solutions, ce ne sont pas les plus impressionnantes. Ce sont celles
@@ -58,74 +106,66 @@ export default function About() {
           <p className="font-medium text-encre">
             C&apos;est comme ça que je travaille.
           </p>
-        </div>
-      </FadeIn>
-
-      {/* Fiche profil — disposition 2 colonnes + 1 large */}
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
-        className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-3"
-      >
-        {/* FORMATION — colonne large (2/3) */}
-        <motion.div
-          variants={staggerItem}
-          className="rounded-2xl border border-trait bg-fond-doux p-6 transition-colors duration-300 hover:border-indigo/40 sm:col-span-2"
-        >
-          <div className="flex items-center gap-3">
-            <span className="grid h-9 w-9 place-items-center rounded-lg bg-indigo/15 text-indigo">
-              <GraduationCap size={18} aria-hidden="true" />
-            </span>
-            <span className="font-mono text-xs font-medium uppercase tracking-widest text-encre-douce">
-              Formation
-            </span>
-          </div>
-          <p className="mt-4 font-sous text-lg font-semibold text-encre">
-            BTS Développement d&apos;Applications
-          </p>
-          <p className="mt-1 text-sm text-encre-douce">
-            Institut Polytechnique DEFITECH
-          </p>
         </motion.div>
 
-        {/* LIEU — colonne fine (1/3) */}
+        {/* === TABLEAU INFOS === */}
         <motion.div
-          variants={staggerItem}
-          className="rounded-2xl border border-trait bg-fond-doux p-6 transition-colors duration-300 hover:border-indigo/40"
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          className="lg:col-span-2"
         >
-          <div className="flex items-center gap-3">
-            <span className="grid h-9 w-9 place-items-center rounded-lg bg-indigo/15 text-indigo">
-              <MapPin size={18} aria-hidden="true" />
-            </span>
-            <span className="font-mono text-xs font-medium uppercase tracking-widest text-encre-douce">
-              Lieu
-            </span>
-          </div>
-          <p className="mt-4 font-sous text-lg font-semibold text-encre">
-            Lomé, Togo
-          </p>
-        </motion.div>
+          <div className="overflow-hidden rounded-2xl border border-trait bg-fond-doux">
+            {infosAbout.map((info, index) => {
+              const Icon = info.icon;
+              const isLast = index === infosAbout.length - 1;
 
-        {/* RECHERCHE — pleine largeur */}
-        <motion.div
-          variants={staggerItem}
-          className="rounded-2xl border border-trait bg-fond-doux p-6 transition-colors duration-300 hover:border-indigo/40 sm:col-span-3"
-        >
-          <div className="flex items-center gap-3">
-            <span className="grid h-9 w-9 place-items-center rounded-lg bg-indigo/15 text-indigo">
-              <Briefcase size={18} aria-hidden="true" />
-            </span>
-            <span className="font-mono text-xs font-medium uppercase tracking-widest text-encre-douce">
-              Recherche
-            </span>
+              return (
+                <motion.div
+                  key={info.label}
+                  variants={item}
+                  className={`flex flex-col gap-2 px-5 py-5 ${
+                    !isLast ? "border-b border-trait" : ""
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <Icon size={14} className="text-indigo" aria-hidden="true" />
+                    <span className="font-mono text-[11px] font-medium uppercase tracking-widest text-encre-douce">
+                      {info.label}
+                    </span>
+                  </div>
+                  <p className="font-sous text-sm font-medium text-encre">
+                    {info.valeur}
+                  </p>
+                  {info.detail && (
+                    <p className="text-xs text-encre-douce">{info.detail}</p>
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
-          <p className="mt-4 font-sous text-lg font-semibold text-encre">
-            Stage • Freelance • Projet ponctuel
-          </p>
+
+          {/* === ENCART "CE QUE JE CHERCHE" === */}
+          <motion.div
+            variants={item}
+            className="mt-4 flex items-start gap-3 rounded-2xl border border-indigo/30 bg-indigo/5 px-5 py-5"
+          >
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-indigo/20 text-indigo">
+              <Target size={18} aria-hidden="true" />
+            </span>
+            <div>
+              <p className="font-mono text-[11px] font-medium uppercase tracking-widest text-indigo/80">
+                Ce que je cherche
+              </p>
+              <p className="mt-1.5 text-sm leading-relaxed text-encre">
+                Un stage ou des missions freelance où je peux apprendre
+                en construisant — et livrer du code qui sert vraiment.
+              </p>
+            </div>
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </Section>
   );
 }

@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Space_Grotesk, DM_Sans, JetBrains_Mono } from "next/font/google";
+import {
+  Playfair_Display,
+  Space_Grotesk,
+  Geist,
+  JetBrains_Mono,
+} from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import CustomCursor from "@/components/CustomCursor";
+import Footer from "@/components/Footer";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -17,10 +23,10 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["400", "500", "600", "700"],
 });
 
-const dmSans = DM_Sans({
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
-  weight: ["400", "500", "700"],
+  variable: "--font-geist",
+  weight: ["400", "500", "600", "700"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -44,7 +50,6 @@ export const metadata: Metadata = {
     "TypeScript",
     "Lomé",
     "Togo",
-    "junior",
     "portfolio",
   ],
   authors: [{ name: "ASSAN Ablavi Clever" }],
@@ -71,12 +76,13 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${playfair.variable} ${spaceGrotesk.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
+      className={`${playfair.variable} ${spaceGrotesk.variable} ${geist.variable} ${jetbrainsMono.variable}`}
     >
       <body className="bg-fond font-texte text-encre antialiased">
         <CustomCursor />
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
