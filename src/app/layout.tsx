@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import {
   Playfair_Display,
   Space_Grotesk,
@@ -70,6 +70,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0E0B1F",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -78,7 +85,7 @@ export default function RootLayout({
       lang="fr"
       className={`${playfair.variable} ${spaceGrotesk.variable} ${geist.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="bg-fond font-texte text-encre antialiased">
+      <body className="bg-fond font-texte text-encre antialiased overflow-x-hidden">
         <CustomCursor />
         <Navbar />
         {children}

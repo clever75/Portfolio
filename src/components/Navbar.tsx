@@ -17,7 +17,7 @@ export default function Navbar() {
     >
       <nav
         aria-label="Navigation principale"
-        className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-6"
+        className="relative mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6"
       >
         {/* ====== LOGO + NOM ====== */}
         <Link href="/" className="group flex items-center gap-3 text-encre">

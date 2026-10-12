@@ -45,47 +45,49 @@ export default function MobileMenu({ links }: { links: NavLink[] }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="absolute inset-x-0 top-full border-b border-trait bg-fond px-6 py-6 shadow-2xl shadow-black/40"
+            className="absolute left-0 right-0 top-full overflow-hidden border-b border-trait bg-fond shadow-2xl shadow-black/40"
           >
-            <ul className="flex flex-col gap-1">
-              {links.map((link, i) => (
-                <motion.li
-                  key={link.href}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.05 * i, duration: 0.25 }}
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="block rounded-lg px-3 py-3 font-sous text-base font-medium text-encre-douce transition-colors hover:bg-fond-doux hover:text-indigo"
+            <div className="mx-auto max-w-6xl px-4 py-6 sm:px-5">
+              <ul className="flex flex-col gap-1">
+                {links.map((link, i) => (
+                  <motion.li
+                    key={link.href}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.05 * i, duration: 0.25 }}
                   >
-                    {link.label}
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
+                    <Link
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className="block rounded-lg px-5 py-3.5 font-sous text-base font-medium text-encre-douce transition-colors hover:bg-fond-doux hover:text-indigo"
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
 
-            {/* Statut dispo mobile */}
-            <div className="mt-6 flex items-center gap-2 border-t border-trait pt-4">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-dispo opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-dispo" />
-              </span>
-              <span className="font-mono text-xs font-medium text-encre-douce">
-                Disponible pour missions
-              </span>
+              {/* Statut dispo mobile */}
+              <div className="mt-6 flex items-center gap-2 border-t border-trait pt-4">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-dispo opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-dispo" />
+                </span>
+                <span className="font-mono text-xs font-medium text-encre-douce">
+                  Disponible pour missions
+                </span>
+              </div>
+
+              {/* CTA CV mobile */}
+              <a
+                href="/cv-clever.pdf"
+                download
+                className="mt-4 inline-flex items-center gap-2 rounded-full border border-trait px-6 py-3 font-sous text-sm font-medium text-encre-douce transition-all hover:border-indigo hover:text-indigo"
+              >
+                <Download size={16} aria-hidden="true" />
+                Télécharger mon CV
+              </a>
             </div>
-
-            {/* CTA CV mobile */}
-            <a
-              href="/cv-clever.pdf"
-              download
-              className="mt-4 inline-flex items-center gap-2 rounded-full border border-trait px-5 py-3 font-sous text-sm font-medium text-encre-douce transition-all hover:border-indigo hover:text-indigo"
-            >
-              <Download size={16} aria-hidden="true" />
-              Télécharger mon CV
-            </a>
           </motion.div>
         )}
       </AnimatePresence>

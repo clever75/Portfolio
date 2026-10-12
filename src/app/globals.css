@@ -42,6 +42,15 @@ body {
   color: var(--color-fond);
 }
 
+/* === FIX GLOBAL — Évite le scroll horizontal sur mobile === */
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: clip;
+}
+
 /* === ACCESSIBILITÉ — Focus visible === */
 :focus-visible {
   outline: 2px solid var(--color-indigo);
@@ -61,9 +70,7 @@ body {
   }
 }
 
-/* === CURSEUR PERSONNALISÉ ===
-   La classe est ajoutée par CustomCursor au premier mouvement de souris,
-   et seulement avec une souris précise (jamais sur tactile). */
+/* === CURSEUR PERSONNALISÉ === */
 html.curseur-personnalise,
 html.curseur-personnalise * {
   cursor: none !important;
