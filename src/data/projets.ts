@@ -106,10 +106,10 @@ export const projets: Projet[] = [
     probleme:
       "Les salons de beauté gèrent souvent leurs rendez-vous et leur stock sur cahier. Résultat : double réservation, oublis, et aucune vision sur les revenus réels.",
     fait:
-      "J'ai développé l'application en VB.NET avec base SQL Server : planning des rendez-vous, gestion des employés, prestations, factures et alertes de stock.",
+      "J'ai développé l'application en VB.NET avec base MySQL : planning des rendez-vous, gestion des employés, prestations, factures et alertes de stock.",
     appris:
-      "Découvrir une nouvelle stack (VB.NET / SQL Server) et m'adapter à un contexte métier différent.",
-    stack: ["VB.NET", "SQL Server"],
+      "Découvrir une nouvelle stack (VB.NET / MySQL) et m'adapter à un contexte métier différent.",
+    stack: ["VB.NET", "MySQL"],
     images: ["/projets/rosa-beauty.jpg"],
   },
 ];
