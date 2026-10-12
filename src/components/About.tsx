@@ -65,22 +65,10 @@ export default function About() {
       <SectionTitle
         number="01"
         label="À propos"
-        title="Apprendre en construisant"
+        title="Quelques mots sur moi"
       />
 
-      {/* === PHRASE SIGNATURE === */}
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.6 }}
-        className="mb-12 max-w-3xl font-titre text-3xl font-bold leading-tight text-encre sm:text-4xl lg:text-5xl"
-      >
-        Comprendre à fond,{" "}
-        <span className="text-indigo">construire juste.</span>
-      </motion.p>
-
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-5">
+      <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-5">
         {/* === TEXTE NARRATIF === */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -90,21 +78,23 @@ export default function About() {
           className="space-y-5 text-base leading-relaxed text-encre-douce sm:text-lg lg:col-span-3"
         >
           <p>
-            Il y a un truc que j&apos;ai compris en codant : les meilleures
-            solutions, ce ne sont pas les plus impressionnantes. Ce sont celles
-            qui marchent, qu&apos;on comprend, et qu&apos;on peut faire évoluer.
+            Je m&apos;appelle Clever. Je vis à Lomé, au Togo, et c&apos;est là
+            que j&apos;ai découvert le code — pendant mon BTS en Développement
+            d&apos;Applications. Ce qui m&apos;a accrochée tout de suite ? Pas
+            les lignes de code en elles-mêmes, mais l&apos;idée de pouvoir
+            résoudre un problème concret avec.
           </p>
           <p>
-            Ce que je livre, je peux l&apos;expliquer. Pas en survol — ligne par
-            ligne, choix par choix. Parce qu&apos;un jour, quelqu&apos;un devra
-            reprendre ce code. Peut-être moi.
+            Depuis, je construis. J&apos;apprends en faisant, en me trompant,
+            en recommençant. Ma méthode tient en une phrase : comprendre à fond
+            avant de construire. Alors je pose des questions, même celles qui
+            paraissent bêtes. Je teste. Je prends le temps de bien faire —
+            parce qu&apos;un code qu&apos;on ne comprend pas ne sert à personne.
           </p>
           <p>
-            Alors je prends le temps. Je pose des questions. Je teste. Et quand
-            ça ne tient pas, je recommence.
-          </p>
-          <p className="font-medium text-encre">
-            C&apos;est comme ça que je travaille.
+            Aujourd&apos;hui, je cherche un stage ou des missions pour
+            continuer à apprendre. En construisant des choses qui servent
+            vraiment.
           </p>
         </motion.div>
 

@@ -1,17 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GraduationCap, MapPin, Briefcase } from "lucide-react";
 import Section from "@/components/ui/Section";
 import SectionTitle from "@/components/ui/SectionTitle";
-import { parcours, ficheProfil } from "@/data/parcours";
-
-// Mapping icône selon l'id de la fiche
-const icones: Record<string, typeof GraduationCap> = {
-  formation: GraduationCap,
-  lieu: MapPin,
-  recherche: Briefcase,
-};
+import { parcours } from "@/data/parcours";
 
 const container = {
   hidden: {},
@@ -36,47 +28,6 @@ export default function Parcours() {
         title="Les étapes qui m'ont menée ici"
         subtitle="Ma formation, mes projets, et où j'en suis aujourd'hui."
       />
-
-      {/* === FICHE PROFIL (3 cartes) === */}
-      <motion.div
-        variants={container}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
-        className="mb-16 grid grid-cols-1 gap-4 sm:grid-cols-3"
-      >
-        {ficheProfil.map((info) => {
-          const Icon = icones[info.id];
-          const isLarge = info.id === "formation";
-
-          return (
-            <motion.div
-              key={info.id}
-              variants={item}
-              className={`
-                rounded-2xl border border-trait bg-fond-doux p-6
-                transition-colors duration-300 hover:border-indigo/40
-                ${isLarge ? "sm:col-span-2" : ""}
-              `}
-            >
-              <div className="flex items-center gap-3">
-                <span className="grid h-9 w-9 place-items-center rounded-lg bg-indigo/15 text-indigo">
-                  <Icon size={18} aria-hidden="true" />
-                </span>
-                <span className="font-mono text-xs font-medium uppercase tracking-widest text-encre-douce">
-                  {info.label}
-                </span>
-              </div>
-              <p className="mt-4 font-sous text-lg font-semibold text-encre">
-                {info.titre}
-              </p>
-              {info.detail && (
-                <p className="mt-1 text-sm text-encre-douce">{info.detail}</p>
-              )}
-            </motion.div>
-          );
-        })}
-      </motion.div>
 
       {/* === TIMELINE === */}
       <div className="relative">
