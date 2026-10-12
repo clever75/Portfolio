@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Captures d'écran (à la racine uniquement)
+/Capture d'écran*

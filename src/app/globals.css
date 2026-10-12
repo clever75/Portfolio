@@ -1,80 +1,25 @@
 @import "tailwindcss";
 
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
 @theme inline {
-  /* === FONDS === */
-  --color-fond:         #0E0B1F;
-  --color-fond-doux:    #1A1530;
-  --color-violet-doux:  #241C42;
-
-  /* === TEXTES === */
-  --color-encre:        #F5F3FF;
-  --color-encre-douce:  #B8B0D9;
-  --color-nuit:         #F5F0E6;
-
-  /* === ACCENTS === */
-  --color-indigo:       #A78BFA;
-  --color-indigo-fonce: #8B6EE8;
-  --color-dispo:        #34D399;
-
-  /* === LIGNES === */
-  --color-trait:        #2A2348;
-
-  /* === TYPO === */
-  --font-titre:     var(--font-playfair), serif;
-  --font-sous:      var(--font-space-grotesk), sans-serif;
-  --font-texte:     var(--font-geist), sans-serif;
-  --font-mono:      var(--font-jetbrains), monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
-/* === BASE === */
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background: var(--color-fond);
-  color: var(--color-encre);
-  font-family: var(--font-texte);
-}
-
-::selection {
-  background: var(--color-indigo);
-  color: var(--color-fond);
-}
-
-/* === ACCESSIBILITÉ — Focus visible === */
-:focus-visible {
-  outline: 2px solid var(--color-indigo);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-
-/* === ACCESSIBILITÉ — Réduction des animations === */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
   }
 }
 
-/* === CURSEUR PERSONNALISÉ ===
-   La classe est ajoutée par CustomCursor au premier mouvement de souris,
-   et seulement avec une souris précise (jamais sur tactile). */
-html.curseur-personnalise,
-html.curseur-personnalise * {
-  cursor: none !important;
-}
-html.curseur-personnalise input,
-html.curseur-personnalise textarea,
-html.curseur-personnalise select {
-  cursor: text !important;
-}
-
-/* === SCROLL — Compensation du header sticky === */
-[id] {
-  scroll-margin-top: 5rem;
+body {
+  background: var(--background);
+  color: var(--foreground);
 }
