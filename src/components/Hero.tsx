@@ -245,13 +245,13 @@ export default function Hero() {
       </section>
 
       {/* ---------- Flèche de défilement ---------- */}
-      <a
+      <Link
         href="/#apropos"
         aria-label="Aller à la section À propos"
         className="absolute bottom-4 left-1/2 -ml-6 hidden h-12 w-12 place-items-center rounded-full border border-trait bg-fond-doux text-encre-douce shadow-lg transition hover:border-indigo hover:text-indigo motion-safe:animate-bounce lg:grid"
       >
         <ArrowDown size={20} aria-hidden="true" />
-      </a>
+      </Link>
     </div>
   );
 }

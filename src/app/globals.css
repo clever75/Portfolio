@@ -61,6 +61,19 @@ body {
   }
 }
 
+/* === CURSEUR PERSONNALISÉ ===
+   La classe est ajoutée par CustomCursor au premier mouvement de souris,
+   et seulement avec une souris précise (jamais sur tactile). */
+html.curseur-personnalise,
+html.curseur-personnalise * {
+  cursor: none !important;
+}
+html.curseur-personnalise input,
+html.curseur-personnalise textarea,
+html.curseur-personnalise select {
+  cursor: text !important;
+}
+
 /* === SCROLL — Compensation du header sticky === */
 [id] {
   scroll-margin-top: 5rem;
