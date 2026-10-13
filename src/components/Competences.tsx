@@ -100,28 +100,30 @@ export default function Competences() {
                       viewport={{ once: true, margin: "-40px" }}
                       className="mt-2.5 flex flex-wrap gap-1.5"
                     >
-                      {sc.items.map((tech) => {
-                        const TechIcon = tech.icon;
-                        return (
-                          <motion.li
-                            key={tech.nom}
-                            variants={tagItem}
-                            className="inline-flex items-center gap-1.5 rounded-md border border-indigo/20 bg-fond px-2.5 py-1 font-mono text-xs text-encre-douce transition-all duration-200 hover:scale-105 hover:border-indigo/60 hover:text-encre"
-                          >
-                            <TechIcon
-                              size={13}
-                              style={
-                                tech.couleur
-                                  ? { color: tech.couleur }
-                                  : undefined
-                              }
-                              aria-hidden="true"
-                              className="shrink-0"
-                            />
-                            {tech.nom}
-                          </motion.li>
-                        );
-                      })}
+                    {sc.items.map((tech) => (
+  <motion.li
+    key={tech.nom}
+    variants={tagItem}
+    className="inline-flex items-center gap-1.5 rounded-md border border-indigo/20 bg-fond px-2.5 py-1 font-mono text-xs text-encre-douce transition-all duration-200 hover:scale-105 hover:border-indigo/60 hover:text-encre"
+  >
+    {tech.logo ? (
+      <img
+        src={tech.logo}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        className={`h-3.5 w-3.5 shrink-0 object-contain ${tech.invert ? "invert" : ""}`}
+      />
+    ) : (
+      <span
+        aria-hidden="true"
+        className="h-1.5 w-1.5 shrink-0 rounded-full"
+        style={{ backgroundColor: tech.couleur ?? "#6366f1" }}
+      />
+    )}
+    {tech.nom}
+  </motion.li>
+))}
                     </motion.ul>
                   </div>
                 ))}

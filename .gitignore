@@ -42,3 +42,10 @@ next-env.d.ts
 
 # Captures d'écran (à la racine uniquement)
 /Capture d'écran*
+# VS Code Local History (à ne pas commiter)
+.history/
+
+# VS Code (sauf extensions recommandées)
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json

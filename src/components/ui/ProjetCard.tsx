@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink, Code2, Clock } from "lucide-react";
 import type { Projet } from "@/data/projets";
+import { getTechIcon } from "@/data/techIcons";
 
 type ProjetCardProps = {
   projet: Projet;
@@ -28,7 +29,7 @@ export default function ProjetCard({
         focus-visible:border-indigo
       `}
     >
-      {/* Image + overlay */}
+      {/* ══ IMAGE + OVERLAY ══ */}
       <div className="p-3 pb-0">
         <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-trait/60 bg-violet-doux">
           <Image
@@ -64,7 +65,7 @@ export default function ProjetCard({
             {projet.annee}
           </span>
 
-          {/* Badge "En ligne" (si projet déployé) */}
+          {/* ══ Badge "En ligne" ══ */}
           {projet.demo && (
             <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/90 px-2.5 py-1 font-mono text-[10px] font-medium text-white backdrop-blur-sm">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
@@ -74,7 +75,7 @@ export default function ProjetCard({
         </div>
       </div>
 
-      {/* Contenu */}
+      {/* ══ CONTENU ══ */}
       <div className={`flex flex-1 flex-col p-6 ${featured ? "lg:p-8" : ""}`}>
         <h3
           className={`font-sous font-semibold text-encre ${
@@ -92,26 +93,63 @@ export default function ProjetCard({
           {projet.description}
         </p>
 
-        <ul className="mt-5 flex flex-wrap gap-1.5">
-          {projet.stack.map((tech) => (
-            <li
-              key={tech}
-              className="rounded-md border border-trait bg-fond px-2 py-0.5 font-mono text-[11px] text-encre-douce"
-            >
-              {tech}
-            </li>
-          ))}
+        {/* ══ Stack avec icônes ══ */}
+        <ul className="mt-5 flex flex-wrap gap-2">
+          {projet.stack.map((tech) => {
+            const icon = getTechIcon(tech);
+            return (
+              <li
+                key={tech}
+                className="inline-flex items-center gap-1.5 rounded-md border border-trait bg-fond px-2 py-1 font-mono text-[11px] text-encre-douce"
+                title={icon?.label ?? tech}
+              >
+                {icon ? (
+                  <img
+                    src={icon.url}
+                    alt=""
+                    aria-hidden="true"
+                    className="h-3.5 w-3.5 object-contain"
+                  />
+                ) : null}
+                <span>{tech}</span>
+              </li>
+            );
+          })}
         </ul>
 
-        <div className="mt-auto flex items-center gap-4 border-t border-trait pt-5">
-          <span className="group/link inline-flex items-center gap-1.5 font-sous text-sm font-medium text-indigo">
-            Voir le projet
-            <ArrowRight
-              size={16}
-              aria-hidden="true"
-              className="transition-transform duration-300 group-hover/link:translate-x-0.5"
-            />
-          </span>
+        {/* ══ Boutons d'action directs ══ */}
+        <div className="mt-auto flex items-center gap-2 border-t border-trait pt-5">
+          {projet.demo ? (
+            <a
+              href={projet.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-indigo px-3 py-2 font-sous text-xs font-medium text-fond transition hover:bg-indigo-fonce"
+            >
+              <ExternalLink size={13} aria-hidden="true" />
+              Voir la démo
+            </a>
+          ) : (
+            <span className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full border border-trait px-3 py-2 font-sous text-xs font-medium text-encre-douce/50">
+              <Clock size={13} aria-hidden="true" />
+              Bientôt en ligne
+            </span>
+          )}
+
+          {projet.github && (
+            <a
+              href={projet.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              aria-label={`Code source de ${projet.titre}`}
+              className="inline-flex items-center justify-center gap-1.5 rounded-full border border-trait px-3 py-2 font-sous text-xs font-medium text-encre transition hover:border-indigo hover:text-indigo"
+            >
+              <Code2 size={13} aria-hidden="true" />
+              Code
+            </a>
+          )}
         </div>
       </div>
     </button>

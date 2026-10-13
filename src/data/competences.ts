@@ -5,33 +5,12 @@ import {
   Wrench,
   type LucideIcon,
 } from "lucide-react";
-import {
-  SiHtml5,
-  SiCss,
-  SiJavascript,
-  SiTypescript,
-  SiReact,
-  SiNextdotjs,
-  SiPhp,
-  SiMysql,
-  SiPostgresql,
-  SiSqlite,
-  SiNodedotjs,
-  SiExpress,
-  SiOpenjdk,
-  SiDotnet,
-  SiElectron,
-  SiGit,
-  SiGithub,
-  SiIntellijidea,
-  SiWebstorm,
-} from "react-icons/si";
-import type { IconType } from "react-icons";
 
 export type Techno = {
   nom: string;
-  icon: IconType | LucideIcon;
-  couleur?: string;
+  logo?: string;      // URL Devicon (CDN)
+  invert?: boolean;   // pour les logos noirs sur fond sombre
+  couleur?: string;   // couleur d'accent (pour le point si pas de logo)
 };
 
 export type SousCategorie = {
@@ -46,6 +25,9 @@ export type CategorieCompetence = {
   sousCategories: SousCategorie[];
 };
 
+// Base CDN Devicon
+const CDN = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons";
+
 export const competences: CategorieCompetence[] = [
   {
     id: "web",
@@ -55,20 +37,20 @@ export const competences: CategorieCompetence[] = [
       {
         label: "Front-end",
         items: [
-          { nom: "HTML", icon: SiHtml5, couleur: "#E34F26" },
-          { nom: "CSS", icon: SiCss, couleur: "#1572B6" },
-          { nom: "JavaScript", icon: SiJavascript, couleur: "#F7DF1E" },
-          { nom: "TypeScript", icon: SiTypescript, couleur: "#3178C6" },
-          { nom: "React", icon: SiReact, couleur: "#61DAFB" },
-          { nom: "Next.js", icon: SiNextdotjs },
+          { nom: "HTML",       logo: `${CDN}/html5/html5-original.svg`,           couleur: "#E34F26" },
+          { nom: "CSS",        logo: `${CDN}/css3/css3-original.svg`,              couleur: "#1572B6" },
+          { nom: "JavaScript", logo: `${CDN}/javascript/javascript-original.svg`,  couleur: "#F7DF1E" },
+          { nom: "TypeScript", logo: `${CDN}/typescript/typescript-original.svg`,  couleur: "#3178C6" },
+          { nom: "React",      logo: `${CDN}/react/react-original.svg`,            couleur: "#61DAFB" },
+          { nom: "Next.js",    logo: `${CDN}/nextjs/nextjs-original.svg`,          invert: true },
         ],
       },
       {
         label: "Back-end",
         items: [
-          { nom: "PHP", icon: SiPhp, couleur: "#777BB4" },
-          { nom: "Node.js", icon: SiNodedotjs, couleur: "#339933" },
-          { nom: "Express", icon: SiExpress },
+          { nom: "PHP",      logo: `${CDN}/php/php-original.svg`,                  couleur: "#777BB4" },
+          { nom: "Node.js",  logo: `${CDN}/nodejs/nodejs-original.svg`,            couleur: "#339933" },
+          { nom: "Express",  logo: `${CDN}/express/express-original.svg`,          invert: true },
         ],
       },
     ],
@@ -81,9 +63,9 @@ export const competences: CategorieCompetence[] = [
       {
         label: "Applications",
         items: [
-          { nom: "Java Swing", icon: SiOpenjdk, couleur: "#E76F00" },
-          { nom: "VB.NET", icon: SiDotnet, couleur: "#512BD4" },
-          { nom: "Electron", icon: SiElectron, couleur: "#47848F" },
+          { nom: "Java Swing", logo: `${CDN}/java/java-original.svg`,              couleur: "#E76F00" },
+          { nom: "VB.NET",     logo: `${CDN}/visualbasic/visualbasic-original.svg`, couleur: "#512BD4" },
+          { nom: "Electron",   logo: `${CDN}/electron/electron-original.svg`,      couleur: "#47848F" },
         ],
       },
     ],
@@ -96,16 +78,16 @@ export const competences: CategorieCompetence[] = [
       {
         label: "SGBD",
         items: [
-          { nom: "MySQL", icon: SiMysql, couleur: "#4479A1" },
-          { nom: "PostgreSQL", icon: SiPostgresql, couleur: "#4169E1" },
-          { nom: "SQLite", icon: SiSqlite, couleur: "#003B57" },
+          { nom: "MySQL",      logo: `${CDN}/mysql/mysql-original.svg`,            couleur: "#4479A1" },
+          { nom: "PostgreSQL", logo: `${CDN}/postgresql/postgresql-original.svg`,  couleur: "#4169E1" },
+          { nom: "SQLite",     logo: `${CDN}/sqlite/sqlite-original.svg`,          couleur: "#003B57" },
         ],
       },
       {
         label: "Compétences",
         items: [
-          { nom: "Modélisation", icon: Database },
-          { nom: "Requêtes SQL", icon: Database },
+          { nom: "Modélisation", couleur: "#6366f1" },
+          { nom: "Requêtes SQL", couleur: "#6366f1" },
         ],
       },
     ],
@@ -118,16 +100,16 @@ export const competences: CategorieCompetence[] = [
       {
         label: "Versioning",
         items: [
-          { nom: "Git", icon: SiGit, couleur: "#F05032" },
-          { nom: "GitHub", icon: SiGithub },
+          { nom: "Git",    logo: `${CDN}/git/git-original.svg`,                    couleur: "#F05032" },
+          { nom: "GitHub", logo: `${CDN}/github/github-original.svg`,              invert: true },
         ],
       },
       {
         label: "Éditeurs",
         items: [
-          { nom: "VS Code", icon: Wrench },
-          { nom: "IntelliJ IDEA", icon: SiIntellijidea },
-          { nom: "WebStorm", icon: SiWebstorm, couleur: "#00CDD7" },
+          { nom: "VS Code",       logo: `${CDN}/vscode/vscode-original.svg`,        couleur: "#007ACC" },
+          { nom: "IntelliJ IDEA", logo: `${CDN}/intellij/intellij-original.svg`,    couleur: "#FE315D" },
+          { nom: "WebStorm",      logo: `${CDN}/webstorm/webstorm-original.svg`,    couleur: "#00CDD7" },
         ],
       },
     ],
