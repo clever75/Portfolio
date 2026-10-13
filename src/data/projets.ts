@@ -31,6 +31,7 @@ export const projets: Projet[] = [
     appris:
       "Gérer un vrai projet avec un vrai besoin derrière — pas juste un exercice scolaire. Prioriser les fonctionnalités qui servent vraiment.",
     stack: ["HTML", "CSS", "PHP", "MySQL"],
+    demo: "https://cleverprojets.infinityfreeapp.com/QuartierAlert/",
     github: "https://github.com/clever75/QuartierAlert",
     images: [
       "/projets/quartier-alert.jpg",
@@ -54,6 +55,7 @@ export const projets: Projet[] = [
     appris:
       "Structurer une base de données pour un catalogue riche et concevoir une expérience de recherche fluide.",
     stack: ["HTML", "CSS", "PHP", "MySQL"],
+    demo: "https://cleverprojets.infinityfreeapp.com/PetMarket/",
     github: "https://github.com/clever75/PetMarket",
     images: [
       "/projets/petmarket.jpg",

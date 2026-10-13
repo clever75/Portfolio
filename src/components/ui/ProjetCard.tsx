@@ -63,6 +63,14 @@ export default function ProjetCard({
           <span className="absolute right-3 top-3 rounded-full border border-trait bg-fond/80 px-2.5 py-1 font-mono text-[10px] font-medium text-encre-douce backdrop-blur-sm">
             {projet.annee}
           </span>
+
+          {/* Badge "En ligne" (si projet déployé) */}
+          {projet.demo && (
+            <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/90 px-2.5 py-1 font-mono text-[10px] font-medium text-white backdrop-blur-sm">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
+              En ligne
+            </span>
+          )}
         </div>
       </div>
 
