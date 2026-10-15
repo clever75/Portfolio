@@ -3,8 +3,20 @@
 import { useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, X, ExternalLink, Code2, Download } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  X,
+  ExternalLink,
+  Code2,
+  Download,
+  Key,
+  User,
+  Copy,
+  Check,
+} from "lucide-react";
 import type { Projet } from "@/data/projets";
+import { getTechIcon } from "@/data/techIcons";
 
 type ProjetModalProps = {
   projet: Projet | null;
@@ -32,12 +44,19 @@ function ModalContenu({
   onClose: () => void;
 }) {
   const [imageIndex, setImageIndex] = useState(0);
+  const [copieChamp, setCopieChamp] = useState<string | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const titreId = useId();
   const nbImages = projet.images.length;
 
   const precedente = () => setImageIndex((i) => (i - 1 + nbImages) % nbImages);
   const suivante = () => setImageIndex((i) => (i + 1) % nbImages);
+
+  const copier = (texte: string, champ: string) => {
+    navigator.clipboard.writeText(texte);
+    setCopieChamp(champ);
+    setTimeout(() => setCopieChamp(null), 1500);
+  };
 
   useEffect(() => {
     const elementAvant =
@@ -122,7 +141,6 @@ function ModalContenu({
           <X size={18} aria-hidden="true" />
         </button>
 
-        {/* Zone scrollable */}
         <div className="overflow-y-auto">
           {/* Carrousel d'images */}
           <div className="relative aspect-[16/10] w-full overflow-hidden bg-violet-doux">
@@ -235,24 +253,115 @@ function ModalContenu({
               </div>
             </div>
 
-            {/* Stack */}
+            {/* ══ Stack avec icônes Devicon ══ */}
             <div className="mt-8 border-t border-trait pt-6">
               <h3 className="font-mono text-xs font-medium uppercase tracking-widest text-encre-douce">
                 Stack
               </h3>
               <ul className="mt-3 flex flex-wrap gap-2">
-                {projet.stack.map((tech) => (
-                  <li
-                    key={tech}
-                    className="rounded-md border border-trait bg-fond px-2.5 py-1 font-mono text-xs text-encre-douce"
-                  >
-                    {tech}
-                  </li>
-                ))}
+                {projet.stack.map((tech) => {
+                  const icon = getTechIcon(tech);
+                  return (
+                    <li
+                      key={tech}
+                      className="inline-flex items-center gap-1.5 rounded-md border border-trait bg-fond px-2.5 py-1 font-mono text-xs text-encre-douce"
+                      title={icon?.label ?? tech}
+                    >
+                      {icon ? (
+                        <img
+                          src={icon.url}
+                          alt=""
+                          aria-hidden="true"
+                          className={`h-3.5 w-3.5 shrink-0 object-contain ${
+                            icon.invert ? "invert" : ""
+                          }`}
+                        />
+                      ) : null}
+                      <span>{tech}</span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 
-            {/* ══ Liens (démo / télécharger / code) ══ */}
+            {/* ══ Compte de démonstration ══ */}
+            {projet.compteDemo && (
+              <div className="mt-8 border-t border-trait pt-6">
+                <div className="flex items-center justify-between gap-3">
+                  <h3 className="flex items-center gap-2 font-mono text-xs font-medium uppercase tracking-widest text-indigo">
+                    <Key size={14} aria-hidden="true" />
+                    Compte de démonstration
+                  </h3>
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-indigo/30 bg-indigo/10 px-2.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-widest text-indigo">
+                    <User size={10} aria-hidden="true" />
+                    {projet.compteDemo.role}
+                  </span>
+                </div>
+
+                <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {/* Username */}
+                  <div className="group/champ relative rounded-lg border border-trait bg-fond/50 p-3 transition hover:border-indigo/40">
+                    <span className="font-mono text-[10px] font-medium uppercase tracking-widest text-encre-douce/60">
+                      Nom d&apos;utilisateur
+                    </span>
+                    <div className="mt-1 flex items-center justify-between gap-2">
+                      <code className="font-mono text-sm font-semibold text-encre">
+                        {projet.compteDemo.username}
+                      </code>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          copier(projet.compteDemo!.username, "username")
+                        }
+                        aria-label="Copier le nom d'utilisateur"
+                        className="grid h-7 w-7 shrink-0 place-items-center rounded-md border border-trait bg-fond text-encre-douce transition hover:border-indigo hover:text-indigo"
+                      >
+                        {copieChamp === "username" ? (
+                          <Check size={12} aria-hidden="true" className="text-emerald-400" />
+                        ) : (
+                          <Copy size={12} aria-hidden="true" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Mot de passe */}
+                  <div className="group/champ relative rounded-lg border border-trait bg-fond/50 p-3 transition hover:border-indigo/40">
+                    <span className="font-mono text-[10px] font-medium uppercase tracking-widest text-encre-douce/60">
+                      Mot de passe
+                    </span>
+                    <div className="mt-1 flex items-center justify-between gap-2">
+                      <code className="font-mono text-sm font-semibold text-encre">
+                        {projet.compteDemo.password}
+                      </code>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          copier(projet.compteDemo!.password, "password")
+                        }
+                        aria-label="Copier le mot de passe"
+                        className="grid h-7 w-7 shrink-0 place-items-center rounded-md border border-trait bg-fond text-encre-douce transition hover:border-indigo hover:text-indigo"
+                      >
+                        {copieChamp === "password" ? (
+                          <Check size={12} aria-hidden="true" className="text-emerald-400" />
+                        ) : (
+                          <Copy size={12} aria-hidden="true" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {projet.compteDemo.note && (
+                  <p className="mt-3 flex items-start gap-2 text-xs italic text-encre-douce/70">
+                    <span className="mt-0.5 inline-block h-1 w-1 shrink-0 rounded-full bg-indigo/60" />
+                    {projet.compteDemo.note}
+                  </p>
+                )}
+              </div>
+            )}
+
+            {/* ══ Liens ══ */}
             {(projet.demo || projet.download || projet.github) && (
               <div className="mt-8 flex flex-wrap gap-3 border-t border-trait pt-6">
                 {projet.demo && (

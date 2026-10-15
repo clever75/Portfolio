@@ -105,13 +105,13 @@ export const competences: CategorieCompetence[] = [
         ],
       },
       {
-        label: "Éditeurs",
-        items: [
-          { nom: "VS Code",       logo: `${CDN}/vscode/vscode-original.svg`,        couleur: "#007ACC" },
-          { nom: "IntelliJ IDEA", logo: `${CDN}/intellij/intellij-original.svg`,    couleur: "#FE315D" },
-          { nom: "WebStorm",      logo: `${CDN}/webstorm/webstorm-original.svg`,    couleur: "#00CDD7" },
-        ],
-      },
+  label: "Éditeurs",
+  items: [
+    { nom: "VS Code",         logo: `${CDN}/vscode/vscode-original.svg`,     couleur: "#007ACC" },
+    { nom: "Apache NetBeans", logo: `${CDN}/netbeans/netbeans-original.svg`, couleur: "#1B6AC6" },
+    { nom: "Visual Studio",   logo: `${CDN}/visualstudio/visualstudio-original.svg`, couleur: "#5C2D91" },
+  ],
+},
     ],
   },
 ];

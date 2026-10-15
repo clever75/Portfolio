@@ -1,3 +1,10 @@
+export type CompteDemo = {
+  role: string;
+  username: string;
+  password: string;
+  note?: string;
+};
+
 export type Projet = {
   id: string;
   titre: string;
@@ -13,6 +20,7 @@ export type Projet = {
   download?: string;
   github?: string;
   annee: string;
+  compteDemo?: CompteDemo;
 };
 
 export const projets: Projet[] = [
@@ -75,6 +83,12 @@ export const projets: Projet[] = [
     download: "https://github.com/clever75/BiblioGest/releases/download/v1.0.0/BiblioGest_Setup_v1.0.exe",
     github: "https://github.com/clever75/BiblioGest",
     images: ["/projets/bibliogest.jpg"],
+    compteDemo: {
+      role: "Administrateur",
+      username: "demo",
+      password: "demo1234",
+      note: "Accès complet à toutes les fonctionnalités",
+    },
   },
   {
     id: "smartcaisse",
@@ -95,6 +109,12 @@ export const projets: Projet[] = [
     download: "https://github.com/clever75/SmartCaisse/releases/download/v1.0.0/SmartCaisse_Setup_v1.0.exe",
     github: "https://github.com/clever75/SmartCaisse",
     images: ["/projets/smartcaisse.jpg"],
+    compteDemo: {
+      role: "Administrateur",
+      username: "demo",
+      password: "demo1234",
+      note: "Accès complet à toutes les fonctionnalités",
+    },
   },
   {
     id: "rosa-beauty",
@@ -115,5 +135,11 @@ export const projets: Projet[] = [
     download: "https://github.com/clever75/BeautyManag/releases/download/v1.0.0/BeautyManager_Setup_v1.0.exe",
     github: "https://github.com/clever75/BeautyManag",
     images: ["/projets/rosa-beauty.jpg"],
+    compteDemo: {
+      role: "Administrateur",
+      username: "gerante",
+      password: "rosa2024",
+      note: "Accès complet à toutes les fonctionnalités",
+    },
   },
 ];
