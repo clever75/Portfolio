@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight, ExternalLink, Code2, Clock } from "lucide-react";
+import { ArrowRight, ExternalLink, Code2, Clock, Download } from "lucide-react";
 import type { Projet } from "@/data/projets";
 import { getTechIcon } from "@/data/techIcons";
 
@@ -65,13 +65,9 @@ export default function ProjetCard({
             {projet.annee}
           </span>
 
-          {/* ══ Badge "En ligne" ══ */}
-          {projet.demo && (
-            <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/90 px-2.5 py-1 font-mono text-[10px] font-medium text-white backdrop-blur-sm">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
-              En ligne
-            </span>
-          )}
+          
+
+          
         </div>
       </div>
 
@@ -93,7 +89,7 @@ export default function ProjetCard({
           {projet.description}
         </p>
 
-        {/* ══ Stack avec icônes ══ */}
+        {/* Stack avec icônes Devicon */}
         <ul className="mt-5 flex flex-wrap gap-2">
           {projet.stack.map((tech) => {
             const icon = getTechIcon(tech);
@@ -108,7 +104,7 @@ export default function ProjetCard({
                     src={icon.url}
                     alt=""
                     aria-hidden="true"
-                    className="h-3.5 w-3.5 object-contain"
+                    className={`h-3.5 w-3.5 object-contain ${icon.invert ? "invert" : ""}`}
                   />
                 ) : null}
                 <span>{tech}</span>
@@ -130,10 +126,21 @@ export default function ProjetCard({
               <ExternalLink size={13} aria-hidden="true" />
               Voir la démo
             </a>
+          ) : projet.download ? (
+            <a
+              href={projet.download}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-emerald-500 px-3 py-2 font-sous text-xs font-medium text-white transition hover:bg-emerald-600"
+            >
+              <Download size={13} aria-hidden="true" />
+              Télécharger
+            </a>
           ) : (
             <span className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full border border-trait px-3 py-2 font-sous text-xs font-medium text-encre-douce/50">
               <Clock size={13} aria-hidden="true" />
-              Bientôt en ligne
+              Bientôt
             </span>
           )}
 

@@ -2,14 +2,15 @@ export type Projet = {
   id: string;
   titre: string;
   type: "Web" | "Desktop";
-  description: string;          // courte, pour la carte
-  descriptionLongue: string;    // longue, pour la modale
+  description: string;
+  descriptionLongue: string;
   probleme: string;
   fait: string;
   appris: string;
   stack: string[];
-  images: string[];             // 1ʳᵉ image = aperçu de la carte
+  images: string[];
   demo?: string;
+  download?: string;
   github?: string;
   annee: string;
 };
@@ -33,11 +34,7 @@ export const projets: Projet[] = [
     stack: ["HTML", "CSS", "PHP", "MySQL"],
     demo: "https://cleverprojets.infinityfreeapp.com/QuartierAlert/",
     github: "https://github.com/clever75/QuartierAlert",
-    images: [
-      "/projets/quartier-alert.jpg",
-      // Ajoute d'autres images ici quand tu les as :
-      // "/projets/quartier-alert-2.jpg",
-    ],
+    images: ["/projets/quartier-alert.jpg"],
   },
   {
     id: "petmarket",
@@ -57,10 +54,7 @@ export const projets: Projet[] = [
     stack: ["HTML", "CSS", "PHP", "MySQL"],
     demo: "https://cleverprojets.infinityfreeapp.com/PetMarket/",
     github: "https://github.com/clever75/PetMarket",
-    images: [
-      "/projets/petmarket.jpg",
-      // "/projets/petmarket-2.jpg",
-    ],
+    images: ["/projets/petmarket.jpg"],
   },
   {
     id: "bibliogest",
@@ -78,6 +72,7 @@ export const projets: Projet[] = [
     appris:
       "Concevoir une interface desktop ergonomique avec Java Swing, et structurer une application en couches (UI / métier / données).",
     stack: ["Java Swing", "MySQL"],
+    download: "https://github.com/clever75/BiblioGest/releases/download/v1.0.0/BiblioGest_Setup_v1.0.exe",
     github: "https://github.com/clever75/BiblioGest",
     images: ["/projets/bibliogest.jpg"],
   },
@@ -97,6 +92,7 @@ export const projets: Projet[] = [
     appris:
       "Gérer une logique métier complexe (calcul de pénalités, échéances, intérêts) et la traduire en interface claire.",
     stack: ["Java Swing", "MySQL"],
+    download: "https://github.com/clever75/SmartCaisse/releases/latest/download/SmartCaisse.exe",
     github: "https://github.com/clever75/SmartCaisse",
     images: ["/projets/smartcaisse.jpg"],
   },
@@ -116,6 +112,7 @@ export const projets: Projet[] = [
     appris:
       "Découvrir une nouvelle stack (VB.NET / MySQL) et m'adapter à un contexte métier différent.",
     stack: ["VB.NET", "MySQL"],
+    download: "https://github.com/clever75/BeautyManag/releases/latest/download/RosaBeauty.exe",
     github: "https://github.com/clever75/BeautyManag",
     images: ["/projets/rosa-beauty.jpg"],
   },

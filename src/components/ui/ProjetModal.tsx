@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, X, ExternalLink, Code2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, X, ExternalLink, Code2, Download } from "lucide-react";
 import type { Projet } from "@/data/projets";
 
 type ProjetModalProps = {
@@ -11,17 +11,9 @@ type ProjetModalProps = {
   onClose: () => void;
 };
 
-// Éléments qu'on peut atteindre avec la touche Tab dans la modale.
 const FOCALISABLES =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-/**
- * Enveloppe : décide seulement si la modale est affichée ou non.
- *
- * Le contenu est dans `ModalContenu` avec `key={projet.id}` : quand le projet
- * change, React détruit et recrée le contenu, donc `imageIndex` repart à 0
- * tout seul. Plus besoin d'un useEffect pour le remettre à zéro.
- */
 export default function ProjetModal({ projet, onClose }: ProjetModalProps) {
   return (
     <AnimatePresence>
@@ -41,15 +33,12 @@ function ModalContenu({
 }) {
   const [imageIndex, setImageIndex] = useState(0);
   const dialogRef = useRef<HTMLDivElement>(null);
-  const titreId = useId(); // id unique pour relier le titre à la modale (aria-labelledby)
+  const titreId = useId();
   const nbImages = projet.images.length;
 
   const precedente = () => setImageIndex((i) => (i - 1 + nbImages) % nbImages);
   const suivante = () => setImageIndex((i) => (i + 1) % nbImages);
 
-  // À l'ouverture : on met le focus dans la modale et on bloque le scroll de
-  // la page. À la fermeture : on rend le focus à l'élément qui l'avait avant
-  // (la carte cliquée), sinon un utilisateur au clavier se retrouve perdu.
   useEffect(() => {
     const elementAvant =
       document.activeElement instanceof HTMLElement
@@ -66,7 +55,6 @@ function ModalContenu({
     };
   }, []);
 
-  // Clavier : Échap ferme, flèches changent d'image, Tab reste dans la modale.
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -82,8 +70,6 @@ function ModalContenu({
         return;
       }
       if (e.key === "Tab") {
-        // Piège à focus : Tab sur le dernier élément revient au premier
-        // (et Shift+Tab sur le premier va au dernier).
         const liste = dialogRef.current?.querySelectorAll<HTMLElement>(FOCALISABLES);
         if (!liste || liste.length === 0) return;
         const premier = liste[0];
@@ -159,7 +145,6 @@ function ModalContenu({
               </motion.div>
             </AnimatePresence>
 
-            {/* Flèches (si plusieurs images) */}
             {nbImages > 1 && (
               <>
                 <button
@@ -179,7 +164,6 @@ function ModalContenu({
                   <ArrowRight size={18} aria-hidden="true" />
                 </button>
 
-                {/* Points indicateurs */}
                 <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
                   {projet.images.map((_, i) => (
                     <button
@@ -202,7 +186,6 @@ function ModalContenu({
 
           {/* Contenu */}
           <div className="p-6 sm:p-8">
-            {/* Badges type + année */}
             <div className="flex items-center gap-2">
               <span className="rounded-full border border-trait bg-fond px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-widest text-indigo">
                 {projet.type}
@@ -212,7 +195,6 @@ function ModalContenu({
               </span>
             </div>
 
-            {/* Titre — relié à la modale via aria-labelledby */}
             <h2
               id={titreId}
               className="mt-4 font-titre text-3xl font-bold text-encre sm:text-4xl"
@@ -220,12 +202,10 @@ function ModalContenu({
               {projet.titre}
             </h2>
 
-            {/* Description longue */}
             <p className="mt-4 leading-relaxed text-encre-douce">
               {projet.descriptionLongue}
             </p>
 
-            {/* Bloc Problème / Fait / Appris */}
             <div className="mt-8 space-y-5 border-t border-trait pt-6">
               <div>
                 <h3 className="font-mono text-xs font-medium uppercase tracking-widest text-indigo">
@@ -272,8 +252,8 @@ function ModalContenu({
               </ul>
             </div>
 
-            {/* Liens */}
-            {(projet.demo || projet.github) && (
+            {/* ══ Liens (démo / télécharger / code) ══ */}
+            {(projet.demo || projet.download || projet.github) && (
               <div className="mt-8 flex flex-wrap gap-3 border-t border-trait pt-6">
                 {projet.demo && (
                   <a
@@ -286,6 +266,19 @@ function ModalContenu({
                     Voir la démo
                   </a>
                 )}
+
+                {projet.download && (
+                  <a
+                    href={projet.download}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 font-sous text-sm font-medium text-white transition hover:bg-emerald-600"
+                  >
+                    <Download size={16} aria-hidden="true" />
+                    Télécharger
+                  </a>
+                )}
+
                 {projet.github && (
                   <a
                     href={projet.github}
