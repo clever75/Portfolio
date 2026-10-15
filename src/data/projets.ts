@@ -92,7 +92,7 @@ export const projets: Projet[] = [
     appris:
       "Gérer une logique métier complexe (calcul de pénalités, échéances, intérêts) et la traduire en interface claire.",
     stack: ["Java Swing", "MySQL"],
-    download: "https://github.com/clever75/SmartCaisse/releases/latest/download/SmartCaisse.exe",
+    download: "https://github.com/clever75/SmartCaisse/releases/download/v1.0.0/SmartCaisse_Setup_v1.0.exe",
     github: "https://github.com/clever75/SmartCaisse",
     images: ["/projets/smartcaisse.jpg"],
   },
