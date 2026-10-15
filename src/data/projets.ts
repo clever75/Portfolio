@@ -112,7 +112,7 @@ export const projets: Projet[] = [
     appris:
       "Découvrir une nouvelle stack (VB.NET / MySQL) et m'adapter à un contexte métier différent.",
     stack: ["VB.NET", "MySQL"],
-    download: "https://github.com/clever75/BeautyManag/releases/latest/download/RosaBeauty.exe",
+    download: "https://github.com/clever75/BeautyManag/releases/download/v1.0.0/BeautyManager_Setup_v1.0.exe",
     github: "https://github.com/clever75/BeautyManag",
     images: ["/projets/rosa-beauty.jpg"],
   },
